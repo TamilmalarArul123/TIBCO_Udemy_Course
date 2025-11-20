@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Catalog xmlns="http://www.tibco.com/schemas/2.ParseRenderXML/Resources/Schemas/Models/Catalog"
+         xmlns:Course="http://www.tibco.com/schemas/2.ParseRenderXML/Resources/Schemas/Models/Course">
+
+    <Course:Course>
+        <Course:id>101</Course:id>
+        <Course:author>Robert Martin</Course:author>
+        <Course:title>Clean Code</Course:title>
+        <Course:genre>Software Engineering</Course:genre>
+        <Course:price>45.50</Course:price>
+        <Course:publishDate>2020-04-10</Course:publishDate>
+    </Course:Course>
+
+    <Course:Course>
+        <Course:id>102</Course:id>
+        <Course:author>Martin Fowler</Course:author>
+        <Course:title>Refactoring</Course:title>
+        <Course:genre>Programming</Course:genre>
+        <Course:price>55.00</Course:price>
+        <Course:publishDate>2019-06-15</Course:publishDate>
+    </Course:Course>
+
+</Catalog>
