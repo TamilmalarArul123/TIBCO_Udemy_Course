@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Orders:Orders
+    xmlns:Orders="http://www.tibco.com/schemas/2.ParseRenderXML/Resources/Schemas/Models/Orders"
+    xmlns:Order="http://www.tibco.com/schemas/2.ParseRenderXML/Resources/Schemas/Models/Order"
+    xmlns:ShipInfo="http://www.tibco.com/schemas/2.ParseRenderXML/Resources/Schemas/Models/ShipInfo">
+
+    <!-- Order #1 -->
+    <Order:Order>
+        <Order:CustomerID>GRAZX</Order:CustomerID>
+        <Order:EmployeeID>5</Order:EmployeeID>
+        <Order:OrderDate>2022-01-01T16:55:00.848Z</Order:OrderDate>
+        <Order:RequiredDate>2022-01-01T16:55:00.848Z</Order:RequiredDate>
+
+        <ShipInfo:ShipInfo>
+            <ShipInfo:ShipVia>2</ShipInfo:ShipVia>
+            <ShipInfo:Freight>3.35</ShipInfo:Freight>
+            <ShipInfo:ShipName>Great Lakes Food Market</ShipInfo:ShipName>
+            <ShipInfo:ShipAddress>2732 Baker Blvd.</ShipInfo:ShipAddress>
+            <ShipInfo:ShipCity>Eugene</ShipInfo:ShipCity>
+            <ShipInfo:ShipRegion>OR</ShipInfo:ShipRegion>
+            <ShipInfo:ShipPostalCode>97403</ShipInfo:ShipPostalCode>
+            <ShipInfo:ShipCountry>USA</ShipInfo:ShipCountry>
+        </ShipInfo:ShipInfo>
+    </Order:Order>
+
+    <!-- Order #2 -->
+    <Order:Order>
+        <Order:CustomerID>GRAZX</Order:CustomerID>
+        <Order:EmployeeID>6</Order:EmployeeID>
+        <Order:OrderDate>2022-01-01T16:55:00.848Z</Order:OrderDate>
+        <Order:RequiredDate>2022-01-01T16:55:00.848Z</Order:RequiredDate>
+
+        <ShipInfo:ShipInfo>
+            <ShipInfo:ShipVia>2</ShipInfo:ShipVia>
+            <ShipInfo:Freight>4.42</ShipInfo:Freight>
+            <ShipInfo:ShipName>Great Lakes Food Market</ShipInfo:ShipName>
+            <ShipInfo:ShipAddress>2732 Baker Blvd.</ShipInfo:ShipAddress>
+            <ShipInfo:ShipCity>Eugene</ShipInfo:ShipCity>
+            <ShipInfo:ShipRegion>OR</ShipInfo:ShipRegion>
+            <ShipInfo:ShipPostalCode>97403</ShipInfo:ShipPostalCode>
+            <ShipInfo:ShipCountry>USA</ShipInfo:ShipCountry>
+        </ShipInfo:ShipInfo>
+    </Order:Order>
+
+</Orders:Orders>
