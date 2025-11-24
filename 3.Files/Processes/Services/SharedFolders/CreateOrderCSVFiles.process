@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://www.tibco.com/schemas/2.ParseRenderXML/Resources/Schemas/Models/Orders" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:pfx2="http://www.tibco.com/schemas/2.ParseRenderXML/Resources/Schemas/Models/ShipInfo" xmlns:ns="http://www.tibco.com/schemas/2.ParseRenderXML/Resources/Schemas/Models/Order" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.tibco.com/schemas/2.ParseRenderXML/Resources/Schemas/Models/Orders" schemaLocation="/Resources/Schemas/Models/Orders.xsd"/>
+    <pd:name>Processes/Services/SharedFolders/CreateOrderCSVFiles.process</pd:name>
+    <pd:startName>Start</pd:startName>
+    <pd:startX>217</pd:startX>
+    <pd:startY>84</pd:startY>
+    <pd:returnBindings/>
+    <pd:endName>End</pd:endName>
+    <pd:endX>816</pd:endX>
+    <pd:endY>87</pd:endY>
+    <pd:errorSchemas/>
+    <pd:processVariables/>
+    <pd:targetNamespace>http://xmlns.example.com/1763744298918</pd:targetNamespace>
+    <pd:activity name="Map Data">
+        <pd:type>com.tibco.plugin.mapper.MapperActivity</pd:type>
+        <pd:resourceType>ae.activities.MapperActivity</pd:resourceType>
+        <pd:x>372</pd:x>
+        <pd:y>85</pd:y>
+        <config>
+            <element>
+                <xsd:element name="root">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element ref="pfx:Orders" minOccurs="0" maxOccurs="unbounded"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </element>
+        </config>
+        <pd:inputBindings>
+            <root>
+                <pfx:Orders>
+                    <ns:Order>
+                        <ns:CustomerID>
+                            <xsl:value-of select="'123'"/>
+                        </ns:CustomerID>
+                        <ns:EmployeeID>
+                            <xsl:value-of select="1"/>
+                        </ns:EmployeeID>
+                        <ns:OrderDate>
+                            <xsl:value-of select="current-dateTime()"/>
+                        </ns:OrderDate>
+                        <ns:RequiredDate>
+                            <xsl:value-of select="current-dateTime()"/>
+                        </ns:RequiredDate>
+                        <pfx2:ShipInfo>
+                            <pfx2:ShipVia>
+                                <xsl:value-of select="12"/>
+                            </pfx2:ShipVia>
+                            <pfx2:Freight>
+                                <xsl:value-of select="12.2"/>
+                            </pfx2:Freight>
+                            <pfx2:ShipName>
+                                <xsl:value-of select="'sindhu'"/>
+                            </pfx2:ShipName>
+                            <pfx2:ShipAddress>
+                                <xsl:value-of select="'v square'"/>
+                            </pfx2:ShipAddress>
+                            <pfx2:ShipCity>
+                                <xsl:value-of select="'chennai'"/>
+                            </pfx2:ShipCity>
+                            <pfx2:ShipRegion>
+                                <xsl:value-of select="'tn'"/>
+                            </pfx2:ShipRegion>
+                            <pfx2:ShipPostalCode>
+                                <xsl:value-of select="123456"/>
+                            </pfx2:ShipPostalCode>
+                            <pfx2:ShipCountry>
+                                <xsl:value-of select="'india'"/>
+                            </pfx2:ShipCountry>
+                        </pfx2:ShipInfo>
+                    </ns:Order>
+                </pfx:Orders>
+            </root>
+        </pd:inputBindings>
+    </pd:activity>
+    <pd:group name="Group">
+        <pd:type>com.tibco.pe.core.LoopGroup</pd:type>
+        <pd:resourceType>ae.process.group</pd:resourceType>
+        <pd:x>459</pd:x>
+        <pd:y>9</pd:y>
+        <pd:width>288</pd:width>
+        <pd:height>140</pd:height>
+        <pd:collapsedWidth>57</pd:collapsedWidth>
+        <pd:collapsedHeight>70</pd:collapsedHeight>
+        <pd:groupVariables/>
+        <pd:joinToggle>inherit</pd:joinToggle>
+        <config>
+            <pd:groupType>simpleGroup</pd:groupType>
+            <pd:serializable>false</pd:serializable>
+        </config>
+        <pd:inputBindings/>
+        <pd:expanded>true</pd:expanded>
+        <pd:transition>
+            <pd:from>start</pd:from>
+            <pd:to>Render Data</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>Write File</pd:from>
+            <pd:to>end</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:transition>
+            <pd:from>Render Data</pd:from>
+            <pd:to>Write File</pd:to>
+            <pd:lineType>Default</pd:lineType>
+            <pd:lineColor>-16777216</pd:lineColor>
+            <pd:conditionType>always</pd:conditionType>
+        </pd:transition>
+        <pd:activity name="Render Data">
+            <pd:type>com.tibco.plugin.parse.RenderActivity</pd:type>
+            <pd:resourceType>ae.activities.RenderActivity</pd:resourceType>
+            <pd:x>540</pd:x>
+            <pd:y>87</pd:y>
+            <config>
+                <ParseSharedConfig>/Resources/CSV/Data-Format-1.sharedparse</ParseSharedConfig>
+            </config>
+            <pd:inputBindings>
+                <Rows>
+                    <xsl:copy-of select="$Map-Data/root/pfx:Orders"/>
+                </Rows>
+            </pd:inputBindings>
+        </pd:activity>
+        <pd:activity name="Write File">
+            <pd:type>com.tibco.plugin.file.FileWriteActivity</pd:type>
+            <pd:resourceType>ae.activities.FileWriteActivity</pd:resourceType>
+            <pd:x>669</pd:x>
+            <pd:y>89</pd:y>
+            <config>
+                <encoding>text</encoding>
+                <compressFile>None</compressFile>
+                <append>true</append>
+            </config>
+            <pd:inputBindings>
+                <ns0:WriteActivityInputTextClass xmlns:ns0="http://www.tibco.com/namespaces/tnt/plugins/file">
+                    <fileName>
+                        <xsl:value-of select="'C:\Users\tamilmar\Documents\TIBCO_Udemy_Course\Files\Input\orders.csv'"/>
+                    </fileName>
+                    <textContent>
+                        <xsl:value-of select="$Render-Data/Text"/>
+                    </textContent>
+                </ns0:WriteActivityInputTextClass>
+            </pd:inputBindings>
+        </pd:activity>
+    </pd:group>
+    <pd:transition>
+        <pd:from>Map Data</pd:from>
+        <pd:to>Group</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Group</pd:from>
+        <pd:to>End</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+    <pd:transition>
+        <pd:from>Start</pd:from>
+        <pd:to>Map Data</pd:to>
+        <pd:lineType>Default</pd:lineType>
+        <pd:lineColor>-16777216</pd:lineColor>
+        <pd:conditionType>always</pd:conditionType>
+    </pd:transition>
+</pd:ProcessDefinition>
