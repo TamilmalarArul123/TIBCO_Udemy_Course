@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pd:ProcessDefinition xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:pfx="http://www.tibco.com/schemas/4.JMS/Resources/Schemas/Services/ProcessFilesRequest" xmlns:pd="http://xmlns.tibco.com/bw/process/2003" xmlns:ns="http://www.tibco.com/namespaces/tnt/plugins/jms" xmlns:ns2="http://www.tibco.com/schemas/2.ParseRenderXML/Resources/Schemas/Models/Context" xmlns:ns1="http://www.tibco.com/schemas/2.ParseRenderXML/Resources/Schemas/Models/Header">
     <xs:import xmlns:xs="http://www.w3.org/2001/XMLSchema" namespace="http://www.tibco.com/schemas/4.JMS/Resources/Schemas/Services/ProcessFilesRequest" schemaLocation="/Resources/Schemas/Orchestration/ProcessFilesRequest.xsd"/>
-    <pd:name>Processes/Interface/ProcessFilesGermany.process</pd:name>
+    <pd:name>Processes/Interface/ProcessFilesSpain.process</pd:name>
     <pd:startName>JMS Topic Subscriber</pd:startName>
     <pd:startX>0</pd:startX>
     <pd:startY>0</pd:startY>
@@ -9,7 +9,7 @@
     <pd:starter name="JMS Topic Subscriber">
         <pd:type>com.tibco.plugin.jms.JMSTopicEventSource</pd:type>
         <pd:resourceType>ae.activities.JMSTopicEventSource</pd:resourceType>
-        <pd:x>135</pd:x>
+        <pd:x>136</pd:x>
         <pd:y>75</pd:y>
         <config>
             <PermittedMessageType>XML Text</PermittedMessageType>
@@ -19,8 +19,8 @@
                 <maxSessions>1</maxSessions>
                 <destination>%%Resources/Connections/JMS/ProcessFilesTopic%%</destination>
                 <durable>true</durable>
-                <subscriptionName>durable.germany</subscriptionName>
-                <selector>%%Resources/Connections/JMS/messageSelectors/Germany%%</selector>
+                <subscriptionName>durable.spain</subscriptionName>
+                <selector>%%Resources/Connections/JMS/messageSelectors/Spain%%</selector>
             </SessionAttributes>
             <ConfigurableHeaders>
                 <JMSDeliveryMode>PERSISTENT</JMSDeliveryMode>
@@ -35,7 +35,7 @@
     </pd:starter>
     <pd:endName>End</pd:endName>
     <pd:endX>478</pd:endX>
-    <pd:endY>77</pd:endY>
+    <pd:endY>78</pd:endY>
     <pd:errorSchemas/>
     <pd:processVariables/>
     <pd:targetNamespace>http://xmlns.example.com/1763962958929</pd:targetNamespace>
@@ -59,10 +59,7 @@
                         <xsl:value-of select="current-dateTime()"/>
                     </ns1:timestamp>
                 </ns1:Header>
-                <pfx:Body>
-                    <xsl:copy-of select="$JMS-Topic-Subscriber/ns:ActivityOutput/Body/pfx:ProcessFilesRequest/pfx:Body/pfx:source"/>
-                    <xsl:copy-of select="$JMS-Topic-Subscriber/ns:ActivityOutput/Body/pfx:ProcessFilesRequest/pfx:Body/pfx:target"/>
-                </pfx:Body>
+                <xsl:copy-of select="$JMS-Topic-Subscriber/ns:ActivityOutput/Body/pfx:ProcessFilesRequest/pfx:Body"/>
             </pfx:ProcessFilesRequest>
         </pd:inputBindings>
     </pd:activity>
